@@ -22,7 +22,9 @@ EOF
 
 oc -n openshift-cnv patch hyperconverged kubevirt-hyperconverged --type=merge --patch "$patch_yaml"
 
-sleep 10
+oc rollout status deployment -n openshift-cnv aaq-controller
+oc rollout status deployment -n openshift-cnv aaq-operator
+oc rollout status deployment -n openshift-cnv aaq-server
 
 oc apply -f - <<END
 apiVersion: aaq.kubevirt.io/v1alpha1
