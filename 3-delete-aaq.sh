@@ -1,24 +1,24 @@
 #!/bin/bash -e
 # Delete Application Aware Quotas DP feature
 
-oc delete -f - <<END
+oc delete -f - <<END || true
 apiVersion: v1
 kind: Namespace
 metadata:
   name: demo-aaq
 END
 
-oc delete -f - <<END
-apiVersion: aaq.kubevirt.io/v1alpha1
-kind: ApplicationAwareResourceQuota
-metadata:
-  name: demo-aaq
-  namespace: demo-aaq
-spec:
-  hard:
-    limits.cpu: "2" 
-    limits.memory: 10Gi
-END
+#oc delete -f - <<END
+#apiVersion: aaq.kubevirt.io/v1alpha1
+#kind: ApplicationAwareResourceQuota
+#metadata:
+#  name: demo-aaq
+#  namespace: demo-aaq
+#spec:
+#  hard:
+#    limits.cpu: "2" 
+#    limits.memory: 10Gi
+#END
 
 ##oc -n demo-aaq delete vm,vmi --all
 

@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 # Configure Application Aware Quotas DP feature
 
 oc apply -f - <<END
@@ -22,6 +22,8 @@ EOF
 
 oc -n openshift-cnv patch hyperconverged kubevirt-hyperconverged --type=merge --patch "$patch_yaml"
 
+sleep 10
+
 oc apply -f - <<END
 apiVersion: aaq.kubevirt.io/v1alpha1
 kind: ApplicationAwareResourceQuota
@@ -33,6 +35,10 @@ spec:
     limits.cpu: "2" 
     limits.memory: 10Gi
 END
+
+sleep 1
+
+oc get ApplicationAwareResourceQuota demo-aaq -o yaml
 
 exit 0
 

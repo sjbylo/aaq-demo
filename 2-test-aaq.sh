@@ -3,23 +3,27 @@
 
 # Create vms
 n=rhel9-$RANDOM
-oc process rhel9-server-tiny -n openshift -p NAME=$n | oc apply -f - -n demo-oadp
+oc process rhel9-server-tiny -n openshift -p NAME=$n | oc apply -f - -n demo-aaq
 sleep 2
-oc get vm $n -n demo-oadp
-virtctl start $n -n demo-oadp
-sleep 2
-
-n=rhel9-$RANDOM
-oc process rhel9-server-tiny -n openshift -p NAME=$n | oc apply -f - -n demo-oadp
-sleep 2
-oc get vm $n -n demo-oadp
-virtctl start $n -n demo-oadp
+oc get vm $n -n demo-aaq
+virtctl start $n -n demo-aaq
 sleep 2
 
 n=rhel9-$RANDOM
-oc process rhel9-server-tiny -n openshift -p NAME=$n | oc apply -f - -n demo-oadp
+oc process rhel9-server-tiny -n openshift -p NAME=$n | oc apply -f - -n demo-aaq
 sleep 2
-oc get vm $n -n demo-oadp
-virtctl start $n -n demo-oadp
+oc get vm $n -n demo-aaq
+virtctl start $n -n demo-aaq
 sleep 2
 
+n=rhel9-$RANDOM
+oc process rhel9-server-tiny -n openshift -p NAME=$n | oc apply -f - -n demo-aaq
+sleep 2
+oc get vm $n -n demo-aaq
+virtctl start $n -n demo-aaq
+sleep 2
+
+echo
+oc get vm,vmi -n demo-aaq
+echo
+oc get ApplicationAwareResourceQuota demo-aaq -o yaml
