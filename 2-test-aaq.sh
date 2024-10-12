@@ -18,9 +18,10 @@ sleep 2
 echo
 oc get vm,vmi -n demo-aaq
 echo
-oc get ApplicationAwareResourceQuota demo-aaq -o yaml
+oc -n demo-aaq get ApplicationAwareResourceQuota demo-aaq -o yaml
 
+echo 
 echo "One of the 3 Vms will not start (READY = False)..."
-sleep 15
-oc get vm,vmi
+sleep 12
+oc -n demo-aaq get vm,vmi
 

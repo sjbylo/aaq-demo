@@ -22,6 +22,8 @@ EOF
 
 oc -n openshift-cnv patch hyperconverged kubevirt-hyperconverged --type=merge --patch "$patch_yaml"
 
+sleep 2
+
 oc rollout status deployment -n openshift-cnv aaq-controller
 oc rollout status deployment -n openshift-cnv aaq-operator
 oc rollout status deployment -n openshift-cnv aaq-server
@@ -38,9 +40,9 @@ spec:
     limits.memory: 10Gi
 END
 
-sleep 1
+sleep 2
 
-oc get ApplicationAwareResourceQuota demo-aaq -o yaml
+oc -n demo-aaq get ApplicationAwareResourceQuota demo-aaq -o yaml
 
 exit 0
 
